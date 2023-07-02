@@ -1,0 +1,15 @@
+---
+
+- hosts: localhost
+  become: true
+  vars_files:
+    - users.yml
+  tasks:
+    - name: delete user
+
+      user:
+        name: "{{ item.name }}"
+#        autoremove: yes
+        state: absent
+      with_items: "{{ users }}"
+
