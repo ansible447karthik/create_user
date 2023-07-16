@@ -1,0 +1,20 @@
+---
+- name: create user 
+  hosts: localhost
+  become: true
+  tasks:
+  vars_files:
+    - users.yml
+  vars:
+    - password: "{{ lookup('password','/home/rtc/revision3/usercreate/create_user/file-{{ item.name }} length=6') }}"  
+  tasks:
+    - name: create user
+      user:
+        name: "{{ item.name }}"
+        uid: "{{ item.uid }}"
+        state: present
+        shell: /bin/bash
+        comment: "{{ item.first | upper }} {{ item.middle | capitalize }} {{ item.last | capitalize }} "
+        password: "{{ password | password_hash ('sha512' , 'mysaltname') }}"
+        update_password: on_create
+      loop: "{{ users }}"

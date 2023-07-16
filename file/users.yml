@@ -1,0 +1,12 @@
+users:
+   - name: john
+     uid: 1010
+     first: john
+     middle: exam
+     last: sinha
+
+   - name: david
+     uid: 1011
+     first: john
+     middle: exam
+     last: warner
